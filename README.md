@@ -1,6 +1,6 @@
 # Slackr
 
-TODO: Write a gem description
+A simple gem for sending messages to the Slack.com communications platform.
 
 ## Installation
 
@@ -18,7 +18,42 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+
+
+Send a message to slack:
+
+```
+require 'slackr'
+slack = Slackr::Client.new("my_team_name","my_api_key")
+slack.send("this is a test")
+```
+
+Send a message to slack using some customization:
+
+```
+require 'slackr'
+slack = Slackr::Client.new("my_team_name","my_api_key",{:icon_emoji => ":ghost:"})
+slack.send("this is a test as a ghost")
+slack.send("this is a test as a ghost with a custom name",{:username => "casper"}
+```
+
+Available customizations include:
+
+```
+# slack_options
+# {
+#   "channel"    => "#myroom",
+#   "username"   => "my_bot_name",
+#   "icon_url"   => "https://slack.com/img/icons/app-57.png",
+#   "icon_emoji" => ":ghost:"
+# }
+```
+
+## TODO
+
+1. More/better tests
+2. Link parsing and attachments
+3. CLI
 
 ## Contributing
 

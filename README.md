@@ -25,16 +25,16 @@ Send a message to slack:
 ```
 require 'slackr'
 slack = Slackr::Client.new("my_team_name","my_api_key")
-slack.send("this is a test")
+slack.say "this is a test"
 ```
 
-Send a message to slack using some customization:
+Say a message to slack using some customization:
 
 ```
 require 'slackr'
 slack = Slackr::Client.new("my_team_name","my_api_key",{:icon_emoji => ":ghost:"})
-slack.send("this is a test as a ghost")
-slack.send("this is a test as a ghost with a custom name",{:username => "casper"}
+slack.say("this is a test as a ghost")
+slack.say("this is a test as a ghost with a custom name",{:username => "casper"}
 ```
 
 Available customizations include:

@@ -30,7 +30,7 @@ module Slackr
       setup_connection
     end
 
-    def send(text="",options={})
+    def say(text="",options={})
       # reformat links, etc here
       send_request(text,options)
     end

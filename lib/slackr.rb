@@ -36,8 +36,9 @@ module Slackr
     end
 
     private
+
     def setup_connection
-      @uri = URI.parse(service_url)
+      @uri  = URI.parse(service_url)
       @http = Net::HTTP.new(@uri.host, @uri.port)
       @http.use_ssl = true
       @http.verify_mode = OpenSSL::SSL::VERIFY_PEER

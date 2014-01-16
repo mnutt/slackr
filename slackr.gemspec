@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Slackr::VERSION
   spec.authors       = ["Jason Rohwedder"]
   spec.email         = ["jro@risk.io"]
-  spec.description   = %q{Talk to slack.com communication platform}
+  spec.description   = %q{Talk to slack.com chat platform from ruby}
   spec.summary       = %q{Send data into Slack in real-time, via the Incoming Webhooks API}
   spec.homepage      = ""
   spec.license       = "MIT"

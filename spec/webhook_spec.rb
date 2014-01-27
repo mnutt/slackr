@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Slackr::Client do
-  let(:client) { Slackr::Client.new("team","token") }
+describe Slackr::Webhook do
+  let(:client) { Slackr::Webhook.new("team","token") }
   subject { client }
 
   describe "#say" do
-    it "should call Client#send_request with proper options" do
+    it "should call Webhook#send_request with proper options" do
       msg  = "This is a test message"
       opts = {"channel" => "#somewhere"}
 
@@ -18,7 +18,7 @@ describe Slackr::Client do
     it "should generate the right url" do
       team    = "my-team"
       token   = "my-token"
-      subject = Slackr::Client.new(team,token)
+      subject = Slackr::Webhook.new(team,token)
 
       subject.send(:service_url).should eq "https://#{team}.slack.com/services/hooks/incoming-webhook?token=#{token}"
     end

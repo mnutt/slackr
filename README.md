@@ -24,7 +24,7 @@ Send a message to slack:
 
 ```
 require 'slackr'
-slack = Slackr::Client.new("my_team_name","my_api_key")
+slack = Slackr::Webhook.new("my_team_name","my_api_key")
 slack.say "this is a test"
 ```
 
@@ -32,7 +32,7 @@ Say a message to slack using some customization:
 
 ```
 require 'slackr'
-slack = Slackr::Client.new("my_team_name","my_api_key",{:icon_emoji => ":ghost:"})
+slack = Slackr::Webhook.new("my_team_name","my_api_key",{:icon_emoji => ":ghost:"})
 slack.say("this is a test as a ghost")
 slack.say("this is a test as a ghost with a custom name",{:username => "casper"}
 ```

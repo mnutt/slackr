@@ -23,19 +23,8 @@ module Slackr
     end
 
     def init
-      verify_options
+      validate_options
       setup_connection
-    end
-
-    # slack_options
-    # {
-    #   "channel"    => "#myroom",
-    #   "username"   => "my_bot_name",
-    #   "icon_url"   => "https://slack.com/img/icons/app-57.png",
-    #   "icon_emoji" => ":ghost:"
-    # }
-    def verify_options
-      # whitelist options
     end
 
     # {
@@ -48,6 +37,17 @@ module Slackr
     end
 
     private
+
+    # slack_options
+    # {
+    #   "channel"    => "#myroom",
+    #   "username"   => "my_bot_name",
+    #   "icon_url"   => "https://slack.com/img/icons/app-57.png",
+    #   "icon_emoji" => ":ghost:"
+    # }
+    def validate_options
+      true
+    end
 
     def setup_connection
       @uri  = URI.parse(service_url)

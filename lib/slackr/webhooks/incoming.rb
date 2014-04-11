@@ -4,12 +4,11 @@ require "uri"
 require "json"
 
 # example:
-# slack = Slackr::Webhook.new("teamX", "token123", {"channel" => "#myroom", "username" => "systems_bot"}).init
+# slack = Slackr::IncomingWebhook.new("teamX", "token123", {"channel" => "#myroom", "username" => "systems_bot"}).init
 # slack.say "hello world" => posts 'hello world' to the myroom channel as the systems_bot user
 # slack.say "hello", {"channel" => "#room2", "username" => "joke_bot"}
 module Slackr
-  #TODO: rename to IncomingWebhook
-  class Webhook
+  class IncomingWebhook
     attr_reader :http, :uri, :default_options
 
     def initialize(team, token, options={})

@@ -1,8 +1,8 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+Dir.glob('../lib/**/*.rb', &method(:require))
 
 require 'slackr'
 require 'webmock/rspec'
+require 'pry'
 
 RSpec.configure do |config|
   # Use color in STDOUT

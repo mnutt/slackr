@@ -22,6 +22,18 @@ module Slackr
       setup_connection
     end
 
+    def base_url
+      "https://#{@team}.slack.com"
+    end
+
+    def uri_request_uri
+      uri.request_uri
+    end
+
+    def http_request(request)
+      http.request(request)
+    end
+
   private
 
     def validate_options
@@ -35,8 +47,5 @@ module Slackr
       @http.verify_mode = OpenSSL::SSL::VERIFY_PEER
     end
 
-    def base_url
-      "https://#{@team}.slack.com"
-    end
   end
 end

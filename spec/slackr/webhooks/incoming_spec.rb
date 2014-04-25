@@ -45,6 +45,10 @@ describe Slackr::IncomingWebhook do
         expect(subject.uri).to_not eq(nil)
         expect(subject.http).to_not eq(nil)
       end
+
+      it "should set a proper host and port", :focus => true do
+        subject.setup_connection
+      end
     end
 
     describe "#service_url" do

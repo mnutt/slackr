@@ -17,7 +17,7 @@ module Slackr
       #formatter = options[:formatter] || BasicFormatter
       #text      = format_text(formatter, text)
       #TODO: fix law of demeter violations
-      request      = Net::HTTP::Post.new(connection.uri_request_uri)
+      request      = Net::HTTP::Post.new(service_url)
       request.body = encode_message(text, options)
       response     = connection.http_request(request)
       if response.code != "200"

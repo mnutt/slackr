@@ -4,7 +4,8 @@ describe Slackr::IncomingWebhook do
   before do
     @connection = Slackr::Connection.new("team", "token", {})
     @connection.send(:setup_connection)
-    stub_request(:post, "https://team.slack.com/").
+
+    stub_request(:post, "https://team.slack.com/services/hooks/incoming-webhook?token=token").
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
       to_return(:status => 200, :body => "", :headers => {})
   end

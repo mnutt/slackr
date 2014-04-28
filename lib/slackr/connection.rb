@@ -46,6 +46,5 @@ module Slackr
       @http.use_ssl = true
       @http.verify_mode = OpenSSL::SSL::VERIFY_PEER
     end
-
   end
 end

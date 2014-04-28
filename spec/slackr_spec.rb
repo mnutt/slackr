@@ -8,5 +8,12 @@ describe Slackr do
       subject.say("hello world", {})
     end
   end
+
+  describe "Webook.new" do
+    it "should allow backwards compatibility" do
+      expect(Slackr).to receive(:connect)
+      Slackr::Webhook.new("team", "token")
+    end
+  end
 end
 

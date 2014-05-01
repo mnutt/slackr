@@ -20,6 +20,7 @@ module Slackr
     def init
       validate_options
       setup_connection
+      return self
     end
 
     def base_url

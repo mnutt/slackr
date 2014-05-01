@@ -2,6 +2,10 @@
 
 A simple wrapper for the http://slack.com API.
 
+## Build Status
+
+[![Build Status](https://travis-ci.org/risk-io/slackr.svg?branch=master)](https://travis-ci.org/risk-io/slackr)
+
 ## Installation
 
 Add this line to your application's Gemfile:

@@ -18,8 +18,6 @@ Or install it yourself as:
 
 ## Usage
 
-
-
 Send a message to slack:
 
 ```
@@ -48,6 +46,11 @@ Available customizations include:
 #   "icon_emoji" => ":ghost:"
 # }
 ```
+## General Notes
+- Slackr::Connection stores the connection information
+- Slackr::Errors stores the various custom errors thrown
+- Slackr::Version stores the gem version
+- Slackr::IncomingWebhook stores the logic for the various incoming webhook API endpoints
 
 ## TODO
 

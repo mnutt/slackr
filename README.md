@@ -22,17 +22,9 @@ Send a message to slack:
 
 ```
 require 'slackr'
-slack = Slackr::Webhook.new("my_team_name","my_api_key")
-slack.say "this is a test"
-```
-
-Say a message to slack using some customization:
-
-```
-require 'slackr'
-slack = Slackr::Webhook.new("my_team_name","my_api_key",{:icon_emoji => ":ghost:"})
-slack.say("this is a test as a ghost")
-slack.say("this is a test as a ghost with a custom name",{:username => "casper"}
+slack = Slackr.connect("teamX", "token124", {"channel" => "#myroom", "username" => "systems_bot"})
+slack.say "hello world" # posts 'hello world' to the myroom channel as the systems_bot user
+slack.say "hello", {"channel" => "#room2", "username" => "joke_bot"} # posts 'hello' to the room2 channel as the joke_but user
 ```
 
 Available customizations include:
@@ -46,6 +38,7 @@ Available customizations include:
 #   "icon_emoji" => ":ghost:"
 # }
 ```
+
 ## General Notes
 - Slackr::Connection stores the connection information
 - Slackr::Errors stores the various custom errors thrown
@@ -54,9 +47,9 @@ Available customizations include:
 
 ## TODO
 
-1. More/better tests
-2. Link parsing and attachments
-3. CLI
+[] Support formats for incoming webhook messages
+[] Link parsing and attachments
+[] CLI
 
 ## Contributing
 

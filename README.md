@@ -1,6 +1,6 @@
 # Slackr
 
-A simple gem for sending messages to the Slack.com communications platform.
+A simple wrapper for the Slack.com API.
 
 ## Installation
 

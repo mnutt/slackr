@@ -6,8 +6,8 @@ require 'slackr/version'
 Gem::Specification.new do |spec|
   spec.name          = "slackr"
   spec.version       = Slackr::VERSION
-  spec.authors       = ["Jason Rohwedder"]
-  spec.email         = ["jro@risk.io"]
+  spec.authors       = ["Jason Rohwedder", "Mike Krisher"]
+  spec.email         = ["jro@risk.io", "mike@mikekrisher.com"]
   spec.description   = %q{Talk to slack.com chat platform from ruby}
   spec.summary       = %q{Send data into Slack in real-time, via the Incoming Webhooks API}
   spec.homepage      = "https://github.com/risk-io/slackr"

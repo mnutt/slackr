@@ -46,7 +46,7 @@ module Slackr
     end
 
     def encode_message(text,options)
-      "payload=#{default_options.merge(options).merge({"text" => text}).to_json.to_s}"
+      default_options.merge(options).merge({"text" => text}).to_json.to_s
     end
 
     def send_request(text,options)

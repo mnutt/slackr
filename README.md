@@ -1,6 +1,6 @@
 # Slackr
 
-A simple wrapper for the Slack.com API.
+A simple wrapper for the http://slack.com API.
 
 ## Installation
 

@@ -3,12 +3,7 @@ require "slackr/errors"
 require "slackr/connection"
 require "slackr/webhooks/incoming"
 
-# old API (soon to be deprecated):
-# slack = Slackr::Webhook.new("my_team_name","my_api_key")
-# slack.say "hello world"
-#
-# new API example:
-# slack = Slackr.connect("teamX", "token123", {"channel" => "#myroom", "username" => "systems_bot"})
+# slack = Slackr.connect("teamX", "token124", {"channel" => "#myroom", "username" => "systems_bot"})
 # slack.say "hello world" => posts 'hello world' to the myroom channel as the systems_bot user
 # slack.say "hello", {"channel" => "#room2", "username" => "joke_bot"} => posts 'hello' to the room2 channel as the joke_but user
 module Slackr
@@ -31,7 +26,7 @@ module Slackr
   # support for backwards compatibility
   class Webhook
     def initialize(team, token, options = {})
-      Slackr.connect(team, token, options)
+      warn "[DEPRECATION] `Slackr::Webhook.new` is deprecated.  Please use `Slackr.connect` instead."
     end
   end
 end

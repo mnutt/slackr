@@ -37,6 +37,10 @@ describe Slackr::Connection do
       stub_request(:post, "https://team.slack.com/").
         with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
         to_return(:status => 200, :body => "", :headers => {})
+
+      stub_request(:post, "https://team.slack.com/").
+        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => "", :headers => {})
     end
 
     it "should return the request_url of the http" do

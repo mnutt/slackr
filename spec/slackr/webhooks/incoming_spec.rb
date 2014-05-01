@@ -35,7 +35,7 @@ describe Slackr::IncomingWebhook do
         text = "this is my awesome message"
 
         result = subject.send(:encode_message, text, {})
-        expect(result).to eq "payload={\"text\":\"#{text}\"}"
+        expect(result).to eq "{\"text\":\"#{text}\"}"
       end
 
       it "should encode a message with options" do
@@ -43,7 +43,7 @@ describe Slackr::IncomingWebhook do
         options = {"channel" => "#awesometown"}
 
         result = subject.send(:encode_message, text, options)
-        expect(result).to eq "payload={\"channel\":\"#awesometown\",\"text\":\"#{text}\"}"
+        expect(result).to eq "{\"channel\":\"#awesometown\",\"text\":\"#{text}\"}"
       end
 
       it "should encode a basic message when there are default options" do
@@ -51,7 +51,7 @@ describe Slackr::IncomingWebhook do
 
         subject.connection.stub(:options).and_return({"icon_emoji" => "ghost"})
         result = subject.send(:encode_message, text, {})
-        expect(result).to eq("payload={\"icon_emoji\":\"ghost\",\"text\":\"#{text}\"}")
+        expect(result).to eq("{\"icon_emoji\":\"ghost\",\"text\":\"#{text}\"}")
       end
 
       it "should encode a message with option when there are default options present" do
@@ -60,7 +60,7 @@ describe Slackr::IncomingWebhook do
 
         subject.connection.stub(:options).and_return({"icon_emoji" => "ghost"})
         result = subject.send(:encode_message, text, options)
-        expect(result).to eq("payload={\"icon_emoji\":\"ghost\",\"channel\":\"#awesometown\",\"text\":\"#{text}\"}")
+        expect(result).to eq("{\"icon_emoji\":\"ghost\",\"channel\":\"#awesometown\",\"text\":\"#{text}\"}")
       end
     end
   end

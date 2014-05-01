@@ -35,7 +35,7 @@ module Slackr
       #TODO: extract OptionValidator
       #TODO: add guard against invalid options
       #TODO: add guard against nil text
-      "payload=#{connection.options.merge(options).merge({"text" => text}).to_json.to_s}"
+      connection.options.merge(options).merge({"text" => text}).to_json.to_s
     end
   end
 end

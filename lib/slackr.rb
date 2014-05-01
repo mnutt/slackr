@@ -19,7 +19,7 @@ module Slackr
     return self
   end
 
-  def say(text, options)
+  def say(text, options = {})
     Slackr::IncomingWebhook.say(connection, text, options)
   end
 

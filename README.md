@@ -51,9 +51,9 @@ Available customizations include:
 
 ## TODO
 
-[] Support formats for incoming webhook messages
-[] Link parsing and attachments
-[] CLI
+- [ ] Support formats for incoming webhook messages
+- [ ] Link parsing and attachments
+- [ ] CLI
 
 ## Contributing
 

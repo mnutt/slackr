@@ -17,13 +17,13 @@ module Slackr
       if response.code != "200"
         raise Slackr::ServiceError, "Slack.com - #{response.code} - #{response.body}"
       end
-      response.body
+      JSON.parse(response.body)
     end
 
   private
 
     def service_url(action)
-      "#{connection.base_url}/api/channel.#{action}?token=#{connection.token}"
+      "#{connection.base_url}/api/channels.#{action}?token=#{connection.token}"
     end
   end
 end

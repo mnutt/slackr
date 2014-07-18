@@ -33,6 +33,11 @@ slack.say "hello world" # posts 'hello world' to the myroom channel as the syste
 slack.say "hello", {"channel" => "#room2", "username" => "joke_bot"} # posts 'hello' to the room2 channel as the joke_but user
 ```
 
+Retrieve the channel list:
+```
+slack.channels.list # returns a hash of channel objects
+```
+
 Available customizations include:
 
 ```
@@ -53,9 +58,9 @@ Available customizations include:
 
 ## TODO
 
-[] Support formats for incoming webhook messages
-[] Link parsing and attachments
-[] CLI
+- [ ] Support formats for incoming webhook messages
+- [ ] Link parsing and attachments
+- [ ] CLI
 
 ## Contributing
 

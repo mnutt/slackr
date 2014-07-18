@@ -8,9 +8,11 @@ A simple wrapper for the http://slack.com API.
 
 ## Installation
 
+NOTE: the most recent version of the gem has not been published to rubygems.org, so specify the path as shown.
+
 Add this line to your application's Gemfile:
 
-    gem 'slackr'
+    gem 'slackr', :git => 'git://github.com/risk-io/slackr.git'
 
 And then execute:
 

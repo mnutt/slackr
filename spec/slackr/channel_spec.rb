@@ -1,11 +1,9 @@
 require 'spec_helper'
 
 describe Slackr::Channel do
-  before do
-    connection = Slackr::Connection.new('team', 'fakeToken').init
-    @subject   = Slackr::Channel.init(connection)
-
-    @list_body = {
+  let(:connection) { Slackr::Connection.new('team', 'fakeToken').init }
+  let(:list_body) do
+    {
       :ok       => true,
       :channels => [
         {
@@ -29,10 +27,12 @@ describe Slackr::Channel do
         }
       ]
     }
-
+  end
+  subject { Slackr::Channel.init(connection) }
+  before do
     stub_request(:get, "https://team.slack.com/api/channels.list?token=fakeToken").
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => @list_body.to_json, :headers => {})
+      to_return(:status => 200, :body => list_body.to_json, :headers => {})
 
     stub_request(:get, "https://team.slack.com/api/channels.foo?token=fakeToken").
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
@@ -40,20 +40,20 @@ describe Slackr::Channel do
 
     stub_request(:get, "https://team.slack.com/api/channels.list?token=fakeToken").
       with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
-      to_return(:status => 200, :body => @list_body.to_json, :headers => {})
+      to_return(:status => 200, :body => list_body.to_json, :headers => {})
   end
 
   describe "#list" do
     it "requests the channel list" do
-      expect(@subject.list).to eq(JSON.parse(@list_body.to_json))
+      expect(subject.list).to eq(JSON.parse(list_body.to_json))
     end
 
     context "with a bad request" do
       it "should raise an error" do
-        bad_url = "#{@subject.connection.base_url}/api/channel.foo?token=#{@subject.connection.token}"
-        expect(@subject).to receive(:service_url).and_return(bad_url)
+        bad_url = "#{subject.connection.base_url}/api/channel.foo?token=#{subject.connection.token}"
+        expect(subject).to receive(:service_url).and_return(bad_url)
         expect {
-          @subject.list
+          subject.list
         }.to raise_error
       end
     end

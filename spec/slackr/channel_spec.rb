@@ -62,7 +62,7 @@ describe Slackr::Channel do
 
   describe "#history" do
     let(:timestamp_1) { "1407368222.000037" }
-    def message(timestamp: timestamp_1)
+    def message(timestamp=timestamp_1)
       {
         "user"       => "U02FBRY5Z",
         "type"       => "message",
@@ -72,13 +72,14 @@ describe Slackr::Channel do
       }
     end
     let(:message_1) { message }
-    let(:message_2) { message(timestamp: "1307368222.000037")}
+    let(:message_2) { message("1307368222.000037")}
 
-    def history_body(messages: [message_1], has_more: false)
+    def history_body(options={})
+      options = {messages:[message_1], has_more: false}.merge(options)
       {
         "ok"       => true,
-        "messages" => messages,
-        "has_more" => has_more
+        "messages" => options[:messages],
+        "has_more" => options[:has_more]
       }
     end
     let(:long_history_body_1) { history_body(has_more: true) }
@@ -111,7 +112,7 @@ describe Slackr::Channel do
     end
     context "with lots of history" do
       it "makes enough requests to get everything" do
-        expect(subject.history(long_channel)).to eq(history_body(messages: [message_1, message_2]))
+        expect(subject.history(long_channel)).to eql(history_body(messages: [message_1, message_2]))
         expect(WebMock).to have_requested(:get, long_history_url_1).once
         expect(WebMock).to have_requested(:get, long_history_url_2)
       end

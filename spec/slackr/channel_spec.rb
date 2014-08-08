@@ -52,7 +52,7 @@ describe Slackr::Channel do
     context "with a bad request" do
       it "raises an error" do
         bad_url = "#{subject.connection.base_url}/api/channel.foo?token=#{subject.connection.token}"
-        expect(subject).to receive(:service_url).and_return(bad_url)
+        expect(subject).to receive(:url_for).and_return(bad_url)
         expect {
           subject.list
         }.to raise_error
@@ -61,35 +61,60 @@ describe Slackr::Channel do
   end
 
   describe "#history" do
-    let(:history_body) do
+    let(:timestamp_1) { "1407368222.000037" }
+    def message(timestamp: timestamp_1)
       {
-        "ok"       => true,
-        "messages" => [
-          {
-            "user"       => "U02FBRY5Z",
-            "type"       => "message",
-            "subtype"    => "channel_join",
-            "text"       => "<@U02FBRY5Z|USER> has joined the channel",
-            "ts"         =>"1407368222.000037"
-          }
-        ],
-        "has_more" => false
+        "user"       => "U02FBRY5Z",
+        "type"       => "message",
+        "subtype"    => "channel_join",
+        "text"       => "<@U02FBRY5Z|USER> has joined the channel",
+        "ts"         => timestamp
       }
     end
+    let(:message_1) { message }
+    let(:message_2) { message(timestamp: "1307368222.000037")}
+
+    def history_body(messages: [message_1], has_more: false)
+      {
+        "ok"       => true,
+        "messages" => messages,
+        "has_more" => has_more
+      }
+    end
+    let(:long_history_body_1) { history_body(has_more: true) }
+    let(:long_history_body_2) { history_body(messages: [message_2]) }
+    let(:headers) { {:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}} }
+
     let(:good_channel) { "goodChannel" }
     let(:bad_channel)  { "badChannel" }
+    let(:long_channel) { "longChannel" }
+    let(:base_history_url) {"https://team.slack.com/api/channels.history?token=fakeToken&count=1000&channel="}
+    let(:bad_history_url) { "#{base_history_url}#{bad_channel}" }
+    let(:good_history_url) { "#{base_history_url}#{good_channel}" }
+    let(:long_history_url_1) { "#{base_history_url}#{long_channel}" }
+    let(:long_history_url_2) { "#{long_history_url_1}&latest=#{timestamp_1}" }
 
     before do
-      stub_request(:get, "https://team.slack.com/api/channels.history?token=fakeToken&channel=#{bad_channel}").
-        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+      stub_request(:get, bad_history_url).with(headers).
         to_return(:status => 404, :body => "", :headers => {})
 
-      stub_request(:get, "https://team.slack.com/api/channels.history?token=fakeToken&channel=#{good_channel}").
-        with(:headers => {'Accept'=>'*/*', 'User-Agent'=>'Ruby'}).
+      stub_request(:get, good_history_url).with(headers).
         to_return(:status => 200, :body => history_body.to_json, :headers => {})
+
+      stub_request(:get, long_history_url_1).with(headers).
+        to_return(:status => 200, :body => long_history_body_1.to_json, :headers => {})
+      stub_request(:get, long_history_url_2).with(headers).
+        to_return(:status => 200, :body => long_history_body_2.to_json, :headers => {})
     end
     it "requests the history of a channel" do
       expect(subject.history(good_channel)).to eq(history_body) #TODO: Should this be JSON.parse(history_body.to_json)? why?
+    end
+    context "with lots of history" do
+      it "makes enough requests to get everything" do
+        expect(subject.history(long_channel)).to eq(history_body(messages: [message_1, message_2]))
+        expect(WebMock).to have_requested(:get, long_history_url_1).once
+        expect(WebMock).to have_requested(:get, long_history_url_2)
+      end
     end
     context "with a bad request" do
       it "raises an error" do

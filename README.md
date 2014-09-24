@@ -38,6 +38,10 @@ Retrieve the channel list:
 slack.channels.list # returns a hash of channel objects
 ```
 
+Upload a file (Note: You must specify channels by their ID, not name. You can send to multiple by using a comma separated list):
+```
+slack.upload '/path/to/a/file.txt', {'channels' => 'C026VKGP7'}
+
 Available customizations include:
 
 ```

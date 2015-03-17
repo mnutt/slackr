@@ -24,7 +24,7 @@ module Slackr
     end
 
     def base_url
-      "https://#{@team}.slack.com"
+      "https://hooks.slack.com"
     end
 
     def uri_request_uri
